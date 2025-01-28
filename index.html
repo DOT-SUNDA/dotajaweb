@@ -1,151 +1,186 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Dot Aja</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dot Auto Cloudsigma Beta</title>
+    <style>
+        /* Tema Gelap */
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    body {
-      font-family: "Courier New", Courier, monospace;
-      background-color: #1e1e2e;
-      color: #d9e0ee;
-      line-height: 1.6;
-      padding: 0 20px;
-    }
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            padding: 20px;
+            margin: 0;
+            background-color: #1e88e5;
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+        }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-    }
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+        }
 
-    header h1 {
-      font-size: 1.8rem;
-      color: #89b4fa;
-    }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            color: #e0e0e0;
+        }
 
-    nav a {
-      color: #d9e0ee;
-      text-decoration: none;
-      margin: 0 10px;
-    }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 2px solid #424242;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #121212;
+            color: #ffffff;
+            box-sizing: border-box;
+        }
 
-    nav a:hover {
-      color: #89b4fa;
-    }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #1e88e5;
+        }
 
-    .hero {
-      text-align: center;
-      padding: 50px 0;
-    }
+        select {
+            appearance: none; /* Hilangkan gaya default browser */
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23ffffff' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px;
+        }
 
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
+        button {
+            background-color: #1e88e5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
 
-    .hero p {
-      font-size: 1.2rem;
-      color: #cdd6f4;
-    }
+        button:hover {
+            background-color: #1565c0;
+        }
 
-    .projects, .contact {
-      margin: 40px 0;
-    }
+        pre {
+            background-color: #2e2e2e;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #424242;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            margin-top: 20px;
+            color: #ffffff;
+        }
 
-    .projects h2, .contact h2 {
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-      color: #89b4fa;
-    }
+        footer {
+            background-color: #1e88e5;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            box-sizing: border-box;
+        }
 
-    .project-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
+        /* Gaya responsif */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
 
-    .project-item {
-      background: #313244;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
+            label, input, select, button {
+                width: 100%;
+            }
 
-    .project-item h3 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
+            button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
 
-    .project-item p {
-      font-size: 0.9rem;
-      color: #cdd6f4;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px 0;
-      font-size: 0.8rem;
-      color: #cdd6f4;
-    }
-
-    footer a {
-      color: #89b4fa;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
+            pre {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Dot Aja</h1>
-    <nav>
-      <a href="#projects">Proyek</a>
-      <a href="#contact">Kontak</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <h2>Welcome</h2>
-    <p>Membangun solusi kreatif</p>
-    <p>LINUX</p>
-  </section>
-
-  <section id="projects" class="projects">
-    <h2>Proyek Saya</h2>
-    <div class="project-list">
-      <div class="project-item">
-        <h3>Proyek 1</h3>
-        <p>Membangun layanan email sementara menggunakan Linux dan JavaScript.</p>
-      </div>
-      <div class="project-item">
-        <h3>Proyek 2</h3>
-        <p>Membuat landing page interaktif dengan tema Ubuntu.</p>
-      </div>
-      <div class="project-item">
-        <h3>Proyek 3</h3>
-        <p>Mengelola server VPS dengan optimasi untuk game dan aplikasi web.</p>
-      </div>
+    <h1>Dot Auto Cloudsigma Beta</h1>
+    <div class="container">
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Masukkan email Anda">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Masukkan password Anda">
+        <br>
+        <label for="script">Select Server:</label>
+        <select id="script">
+            <option value="script1.sh">CAIRO</option>
+            <option value="script2.sh">MANILA</option>
+            <option value="script3.sh">CARK</option>
+        </select>
+        <br>
+        <button id="runBtn">Jalankan Skrip</button>
+        <pre id="output"></pre>
     </div>
-  </section>
 
-  <section id="contact" class="contact">
-    <h2>Kontak</h2>
-    <p>Hubungi saya di: <a href="mailto:hendykusnandy@gmail.com">hendykusnandy@gmail.com</a></p>
-  </section>
+    <footer>
+        <p>&copy; 2025 Dot Auto Cloudsigma Beta. Semua hak cipta dilindungi.</p>
+    </footer>
 
-  <footer>
-    <p>Dot Aja</p>
-  </footer>
+    <script>
+        document.getElementById('runBtn').addEventListener('click', async () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const selectedScript = document.getElementById('script').value;
+            document.getElementById('output').innerText = 'Running script...';
+
+            try {
+                const response = await fetch('http://103.56.4.44:5000/run-script', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, script: selectedScript })
+                });
+                const result = await response.json();
+                if (result.status === 'success') {
+                    document.getElementById('output').innerText = result.output;
+                } else {
+                    document.getElementById('output').innerText = `Error: ${result.message}`;
+                }
+            } catch (error) {
+                document.getElementById('output').innerText = `Request failed: ${error}`;
+            }
+        });
+    </script>
 </body>
 </html>
