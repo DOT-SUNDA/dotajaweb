@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dot Auto Cloudsigma Beta</title>
+    <title>Auto Create VPS</title>
     <style>
         /* Tema Gelap */
         body {
@@ -20,7 +20,7 @@
         h1 {
             text-align: center;
             color: #ffffff;
-            padding: 20px;
+            padding: 15px;
             margin: 0;
             background-color: #1e88e5;
             width: 100%;
@@ -46,7 +46,7 @@
             color: #e0e0e0;
         }
 
-        input, select {
+        input {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -59,17 +59,77 @@
             box-sizing: border-box;
         }
 
-        input:focus, select:focus {
+        input:focus {
             outline: none;
             border-color: #1e88e5;
         }
 
-        select {
-            appearance: none; /* Hilangkan gaya default browser */
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23ffffff' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 12px;
+        /* Custom Select */
+        .custom-select {
+            position: relative;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .select-box {
+            background-color: #121212;
+            border: 2px solid #424242;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 16px;
+            color: #ffffff;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .select-box:hover {
+            border-color: #1e88e5;
+        }
+
+        .select-box::after {
+            content: "▼";
+            position: absolute;
+            right: 15px;
+            color: #ffffff;
+            pointer-events: none;
+        }
+
+        /* Dropdown List */
+        .select-dropdown {
+            display: none;
+            position: absolute;
+            background-color: rgba(30, 30, 30, 0.95);
+            width: 100%;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            margin-top: 5px;
+            overflow: hidden;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .select-dropdown div {
+            padding: 12px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .select-dropdown div:hover {
+            background-color: #1e88e5;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         button {
@@ -104,7 +164,7 @@
             background-color: #1e88e5;
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 2px;
             width: 100%;
             position: absolute;
             bottom: 0;
@@ -119,7 +179,7 @@
                 font-size: 24px;
             }
 
-            label, input, select, button {
+            label, input, .custom-select, button {
                 width: 100%;
             }
 
@@ -135,7 +195,7 @@
     </style>
 </head>
 <body>
-    <h1>Dot Auto Cloudsigma Beta</h1>
+    <h1>Auto Create VPS</h1>
     <div class="container">
         <label for="email">Email:</label>
         <input type="email" id="email" placeholder="Masukkan email Anda">
@@ -144,56 +204,86 @@
         <input type="password" id="password" placeholder="Masukkan password Anda">
         <br>
         <label for="script">Select Server:</label>
-        <select id="script">
-            <option value="script1.sh">CAIRO</option>
-            <option value="script2.sh">MANILA</option>
-            <option value="script3.sh">CARK</option>
-        </select>
+        <div class="custom-select">
+            <div class="select-box" onclick="toggleDropdown()">
+                <span id="selected-option">Pilih Server</span>
+            </div>
+            <div class="select-dropdown" id="dropdown">
+                <div onclick="selectOption('CAIRO', 'script1.sh')">CAIRO</div>
+                <div onclick="selectOption('MANILA', 'script2.sh')">MANILA</div>
+                <div onclick="selectOption('CARK', 'script3.sh')">CARK</div>
+            </div>
+        </div>
+        <input type="hidden" id="script-value">
         <br>
         <button id="runBtn">Jalankan Skrip</button>
         <pre id="output"></pre>
     </div>
 
     <footer>
-        <p>&copy; 2025 Dot Auto Cloudsigma Beta. Semua hak cipta dilindungi.</p>
+        <p>DOT AJA</p>
     </footer>
 
     <script>
-    document.getElementById('runBtn').addEventListener('click', async () => {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const selectedScript = document.getElementById('script').value;
-        document.getElementById('output').innerText = 'Running script...';
-
-        try {
-            const response = await fetch('http://103.56.4.44:5000/run-script', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password, script: selectedScript })
-            });
-
-            // Debugging: Lihat status dan body respons
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`HTTP error! Status: ${response.status}. Message: ${errorText}`);
-            }
-
-            const result = await response.json();
-
-            // Debugging: Cek hasil respons
-            console.log(result);  // Melihat apa yang diterima dari server
-
-            if (result.status === 'success') {
-                document.getElementById('output').innerText = result.output;
-            } else {
-                document.getElementById('output').innerText = `Error: ${result.message}`;
-            }
-        } catch (error) {
-            // Debugging: Tampilkan error
-            console.error(error);
-            document.getElementById('output').innerText = `Request failed: ${error.message}`;
+        function toggleDropdown() {
+            var dropdown = document.getElementById("dropdown");
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
         }
-    });
+
+        function selectOption(name, value) {
+            document.getElementById("selected-option").innerText = name;
+            document.getElementById("script-value").value = value;
+            document.getElementById("dropdown").style.display = "none";
+        }
+
+        // Tutup dropdown saat klik di luar elemen
+        document.addEventListener("click", function(event) {
+            var selectBox = document.querySelector(".custom-select");
+            if (!selectBox.contains(event.target)) {
+                document.getElementById("dropdown").style.display = "none";
+            }
+        });
+        document.getElementById('runBtn').addEventListener('click', async () => {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const selectedScript = document.getElementById('script-value').value; // Mengambil nilai dari hidden input
+    document.getElementById('output').innerText = 'Running script...';
+
+    if (!selectedScript) {
+        document.getElementById('output').innerText = 'Silakan pilih server terlebih dahulu!';
+        return;
+    }
+
+    try {
+        const response = await fetch('http://103.56.4.44:5000/run-script', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, script: selectedScript })
+        });
+
+        // Debugging: Lihat status dan body respons
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`HTTP error! Status: ${response.status}. Message: ${errorText}`);
+        }
+
+        const result = await response.json();
+
+        // Debugging: Cek hasil respons
+        console.log(result);  // Melihat apa yang diterima dari server
+
+        if (result.status === 'success') {
+            document.getElementById('output').innerText = result.output;
+        } else {
+            document.getElementById('output').innerText = `Error: ${result.message}`;
+        }
+    } catch (error) {
+        // Debugging: Tampilkan error
+        console.error(error);
+        document.getElementById('output').innerText = `Request failed: ${error.message}`;
+    }
+});
+
     </script>
 </body>
 </html>
