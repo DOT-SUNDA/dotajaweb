@@ -20,15 +20,15 @@
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const selectedScript = document.getElementById('script-value').value; // Mengambil nilai dari hidden input
-    document.getElementById('output').innerText = 'Running script...';
+    document.getElementById('output').innerText = 'sedang di proses harap tunggu...';
 
     if (!selectedScript) {
-        document.getElementById('output').innerText = 'Silakan pilih server terlebih dahulu!';
+        document.getElementById('output').innerText = 'pilih server terlebih dahulu!';
         return;
     }
 
     try {
-        const response = await fetch('https://nameless-pine-692d.dotaja.workers.dev', {
+        const response = await fetch('http://103.56.4.44:5000/run-script', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, script: selectedScript })
@@ -37,7 +37,7 @@
         // Debugging: Lihat status dan body respons
         if (!response.ok) {
             const errorText = await response.text();
-            throw new Error(`HTTP error! Status: ${response.status}. Message: ${errorText}`);
+            throw new Error(`mungkin dia lelah`);
         }
 
         const result = await response.json();
@@ -48,11 +48,11 @@
         if (result.status === 'success') {
             document.getElementById('output').innerText = result.output;
         } else {
-            document.getElementById('output').innerText = `Error: ${result.message}`;
+            document.getElementById('output').innerText = `lelah kayanya`;
         }
     } catch (error) {
         // Debugging: Tampilkan error
         console.error(error);
-        document.getElementById('output').innerText = `Request failed: ${error.message}`;
+        document.getElementById('output').innerText = `lelah banget ini mah`;
     }
 });
