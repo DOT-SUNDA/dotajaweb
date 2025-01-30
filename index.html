@@ -4,195 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auto Create VPS</title>
-    <style>
-        /* Tema Gelap */
-        body {
-            font-family: 'Ubuntu', sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        h1 {
-            text-align: center;
-            color: #ffffff;
-            padding: 15px;
-            margin: 0;
-            background-color: #1e88e5;
-            width: 100%;
-            text-align: center;
-            box-sizing: border-box;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            background-color: #1f1f1f;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            margin-bottom: 40px;
-        }
-
-        label {
-            font-weight: bold;
-            margin-top: 10px;
-            display: block;
-            color: #e0e0e0;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 2px solid #424242;
-            border-radius: 4px;
-            font-size: 16px;
-            background-color: #121212;
-            color: #ffffff;
-            box-sizing: border-box;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #1e88e5;
-        }
-
-        /* Custom Select */
-        .custom-select {
-            position: relative;
-            width: 100%;
-            cursor: pointer;
-        }
-
-        .select-box {
-            background-color: #121212;
-            border: 2px solid #424242;
-            border-radius: 6px;
-            padding: 12px;
-            font-size: 16px;
-            color: #ffffff;
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .select-box:hover {
-            border-color: #1e88e5;
-        }
-
-        .select-box::after {
-            content: "▼";
-            position: absolute;
-            right: 15px;
-            color: #ffffff;
-            pointer-events: none;
-        }
-
-        /* Dropdown List */
-        .select-dropdown {
-            display: none;
-            position: absolute;
-            background-color: rgba(30, 30, 30, 0.95);
-            width: 100%;
-            border-radius: 6px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            margin-top: 5px;
-            overflow: hidden;
-            z-index: 1000;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        .select-dropdown div {
-            padding: 12px;
-            color: #ffffff;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .select-dropdown div:hover {
-            background-color: #1e88e5;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        button {
-            background-color: #1e88e5;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #1565c0;
-        }
-
-        pre {
-            background-color: #2e2e2e;
-            padding: 15px;
-            border-radius: 4px;
-            border: 1px solid #424242;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-x: auto;
-            margin-top: 20px;
-            color: #ffffff;
-        }
-
-        footer {
-            background-color: #1e88e5;
-            color: white;
-            text-align: center;
-            padding: 2px;
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            box-sizing: border-box;
-        }
-
-        /* Gaya responsif */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 24px;
-            }
-
-            label, input, .custom-select, button {
-                width: 100%;
-            }
-
-            button {
-                font-size: 14px;
-                padding: 8px 16px;
-            }
-
-            pre {
-                padding: 10px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="memek.css">
 </head>
 <body>
     <h1>Auto Create VPS</h1>
@@ -209,81 +21,20 @@
                 <span id="selected-option">Pilih Server</span>
             </div>
             <div class="select-dropdown" id="dropdown">
-                <div onclick="selectOption('CAIRO', 'script1.sh')">CAIRO</div>
+                <div onclick="selectOption('MANILA2', 'mnl2')">MANILA2</div>
                 <div onclick="selectOption('MANILA', 'script2.sh')">MANILA</div>
                 <div onclick="selectOption('CARK', 'script3.sh')">CARK</div>
             </div>
         </div>
         <input type="hidden" id="script-value">
         <br>
-        <button id="runBtn">Jalankan Skrip</button>
+        <button id="runBtn">Create VPS</button>
         <pre id="output"></pre>
     </div>
 
     <footer>
         <p>DOT AJA</p>
     </footer>
-
-    <script>
-        function toggleDropdown() {
-            var dropdown = document.getElementById("dropdown");
-            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
-        }
-
-        function selectOption(name, value) {
-            document.getElementById("selected-option").innerText = name;
-            document.getElementById("script-value").value = value;
-            document.getElementById("dropdown").style.display = "none";
-        }
-
-        // Tutup dropdown saat klik di luar elemen
-        document.addEventListener("click", function(event) {
-            var selectBox = document.querySelector(".custom-select");
-            if (!selectBox.contains(event.target)) {
-                document.getElementById("dropdown").style.display = "none";
-            }
-        });
-        document.getElementById('runBtn').addEventListener('click', async () => {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const selectedScript = document.getElementById('script-value').value; // Mengambil nilai dari hidden input
-    document.getElementById('output').innerText = 'Running script...';
-
-    if (!selectedScript) {
-        document.getElementById('output').innerText = 'Silakan pilih server terlebih dahulu!';
-        return;
-    }
-
-    try {
-        const response = await fetch('https://nameless-pine-692d.dotaja.workers.dev', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password, script: selectedScript })
-        });
-
-        // Debugging: Lihat status dan body respons
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`HTTP error! Status: ${response.status}. Message: ${errorText}`);
-        }
-
-        const result = await response.json();
-
-        // Debugging: Cek hasil respons
-        console.log(result);  // Melihat apa yang diterima dari server
-
-        if (result.status === 'success') {
-            document.getElementById('output').innerText = result.output;
-        } else {
-            document.getElementById('output').innerText = `Error: ${result.message}`;
-        }
-    } catch (error) {
-        // Debugging: Tampilkan error
-        console.error(error);
-        document.getElementById('output').innerText = `Request failed: ${error.message}`;
-    }
-});
-
-    </script>
+    <script src="kontol.js"></script>
 </body>
 </html>
